@@ -2,8 +2,8 @@
 - name: Install this role on {{ansible_os_family}}
   include: "{{ansible_os_family}}.yml"
 
-- name: Check ruby Version
-  shell: ruby -v
-  register: ruby_ver
-  notify: Ruby Version
+### Check version
+- block:
+  - name: Check Knowage Version
+    shell: sudo sh -c " ruby -v 1>> /data/logs/install_version.txt"
 
