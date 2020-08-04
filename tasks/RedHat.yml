@@ -1,23 +1,10 @@
-# - name: Get Version
-#   shell: echo "{{ruby_ver}}*10" | bc -l -q | sed 's/\.[0-9]\+//g'
-#   register: rubyver
+ - name: Install ruby-install tool
+   shell: |
+     wget -O ruby-install-0.7.1.tar.gz https://github.com/postmodern/ruby-install/archive/v0.7.1.tar.gz 
+     tar -xzvf ruby-install-0.7.1.tar.gz
+     cd ruby-install-0.7.1/
+     sudo make install
 
-# - name: Add SCL repo
-#   yum:
-#     name: centos-release-scl-rh
-
-# - name: Install Ruby
-#   yum:
-#     name: ["rh-ruby{{rubyver.stdout}}","rh-ruby{{rubyver.stdout}}-ruby-devel","rh-ruby{{rubyver.stdout}}-ruby-libs"]
-
-# - name: Set Setup
-#   template:
-#     src: rh-ruby.sh.jinja2
-#     dest: /etc/profile.d/rh-ruby.sh
-
-
-# - name: ruby version
-#   shell: ruby -v
 
 # - name: Install Bundler
 #   gem:
