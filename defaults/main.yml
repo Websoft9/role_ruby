@@ -1,2 +1,6 @@
 # support version: 2.2 2.3 2.4 2.5 2.6
 ruby_version: "2.4"  
+
+# A tool for intalling ruby, https://github.com/postmodern/ruby-install
+ruby_rubyinstall_version: "0.7.1"
+
