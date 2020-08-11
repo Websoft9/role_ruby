@@ -7,4 +7,6 @@
 
 
  - name: Install Bundler
-   shell: ruby-install ruby {{ruby_version}}
+   shell: |
+     ruby-install ruby {{ruby_version}}
+     ln -sf /opt/rubies/ruby-2.4.10/bin/ruby /usr/bin
