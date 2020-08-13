@@ -14,3 +14,4 @@
      ln -sf /opt/rubies/ruby-*/bin/bundle /usr/bin
      ln -sf /opt/rubies/ruby-*/bin/rake /usr/bin
      ln -sf /opt/rubies/ruby-*/bin/rails /usr/bin
+     ln -sf /opt/rubies/ruby-*/bin/puma /usr/local/bin
