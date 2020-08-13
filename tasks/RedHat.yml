@@ -5,8 +5,12 @@
      cd ruby-install-{{ruby_rubyinstall_version}}/
      sudo make install
 
-
- - name: Install Bundler
+ - name: Install ruby-{{ruby_version}} and bundle
    shell: |
      ruby-install ruby {{ruby_version}}
-     ln -sf /opt/rubies/ruby-2.4.10/bin/ruby /usr/bin
+     ln -sf /opt/rubies/ruby-*/bin/ruby /usr/bin
+     ln -sf /opt/rubies/ruby-*/bin/gem /usr/bin
+     gem install bundle
+     ln -sf /opt/rubies/ruby-*/bin/bundle /usr/bin
+     ln -sf /opt/rubies/ruby-*/bin/rake /usr/bin
+     ln -sf /opt/rubies/ruby-*/bin/rails /usr/bin
