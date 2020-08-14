@@ -6,3 +6,6 @@
 - block:
   - name: Check Ruby Version
     shell: sudo sh -c " ruby -v 1>> /data/logs/install_version.txt"
+    
+- name: Install Bundler 
+  shell: gem install bundler
