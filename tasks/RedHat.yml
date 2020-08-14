@@ -31,6 +31,3 @@
   shell: "source /etc/profile.d/rvm.sh && rvm use {{rvm_default_ruby_version}} --default executable=/bin/bash"
   ignore_errors: True
   changed_when: False
-
-- name: Install Bundler 
-  shell: gem install bundler
