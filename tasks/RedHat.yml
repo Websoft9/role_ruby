@@ -1,17 +1,33 @@
- - name: Install ruby-install tool
-   shell: |
-     wget -O ruby-install-{{ruby_rubyinstall_version}}.tar.gz https://github.com/postmodern/ruby-install/archive/v{{ruby_rubyinstall_version}}.tar.gz 
-     tar -xzvf ruby-install-{{ruby_rubyinstall_version}}.tar.gz
-     cd ruby-install-{{ruby_rubyinstall_version}}/
-     sudo make install
+- name: Import key
+  shell: gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+   
+- name: downloading RVM installer
+  get_url:
+    url: "{{rvm.url}}"
+    dest: "{{rvm.temp_installer_path}}"
 
- - name: Install ruby-{{ruby_version}} and bundle
-   shell: |
-     ruby-install ruby {{ruby_version}}
-     ln -sf /opt/rubies/ruby-*/bin/ruby /usr/bin
-     ln -sf /opt/rubies/ruby-*/bin/gem /usr/bin
-     gem install bundle
-     ln -sf /opt/rubies/ruby-*/bin/bundle /usr/bin
-     ln -sf /opt/rubies/ruby-*/bin/rake /usr/bin
-     ln -sf /opt/rubies/ruby-*/bin/rails /usr/bin
-     ln -sf /opt/rubies/ruby-*/bin/puma /usr/local/bin
+- name: set executable RVM installer
+  file:
+    path: "{{rvm.temp_installer_path}}"
+    mode: 0750
+
+- name: installing RVM as root
+  command: "{{rvm.temp_installer_path}} --path /usr/local/rvm stable"
+  when: ansible_user == "root" 
+
+- name: removing RVM installer
+  file:
+    path: "{{rvm.temp_installer_path}}"
+    state: absent
+
+- name: setting RVM autolibs on as root
+  command: "/usr/local/rvm/bin/rvm autolibs 3"
+  when: ansible_user == "root"
+
+- name: installing Ruby as root
+  command: "/usr/local/rvm/bin/rvm install {{rvm_default_ruby_version}}"
+
+- name: setting default Ruby version as root
+  shell: "source /etc/profile.d/rvm.sh && rvm use {{rvm_default_ruby_version}} --default executable=/bin/bash"
+  ignore_errors: True
+  changed_when: False
