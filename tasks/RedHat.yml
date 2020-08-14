@@ -15,18 +15,16 @@
 
 - name: installing RVM as root
   command: "{{rvm.temp_installer_path}} --path /usr/local/rvm stable"
-  when: ansible_user == "root" 
 
 - name: removing RVM installer
   file:
     path: "{{rvm.temp_installer_path}}"
     state: absent
 
-- name: setting RVM autolibs on as root
+- name: setting RVM autolibs on
   command: "/usr/local/rvm/bin/rvm autolibs 3"
-  when: ansible_user == "root"
 
-- name: installing Ruby as root
+- name: installing Ruby
   command: "/usr/local/rvm/bin/rvm install {{rvm_default_ruby_version}}"
 
 - name: setting default Ruby version as root
