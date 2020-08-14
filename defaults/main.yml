@@ -4,3 +4,8 @@ ruby_version: "2.4"
 # A tool for intalling ruby, https://github.com/postmodern/ruby-install
 ruby_rubyinstall_version: "0.7.1"
 
+rvm:
+  url: https://get.rvm.io
+  temp_installer_path: /tmp/rvm-installer.sh
+
+rvm_default_ruby_version: 2.4
