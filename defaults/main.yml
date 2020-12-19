@@ -6,4 +6,4 @@ ruby_version: "2.4"
 # https://github.com/rvm/ubuntu_rvm
 ruby_rvm:
   url: https://get.rvm.io
-  temp_installer_path: /tmp/rvm-installer.sh
+  download_path: /tmp/rvm-installer.sh
