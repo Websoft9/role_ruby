@@ -2,10 +2,42 @@
 - name: Install this role on {{ansible_os_family}}
   include: "{{ansible_os_family}}.yml"
 
+- name: Import key
+  shell: |
+    curl -sSL https://rvm.io/mpapis.asc | gpg2 --import -
+    curl -sSL https://rvm.io/pkuczynski.asc | gpg2 --import -
+   
+- name: Download RVM installer
+  get_url:
+    url: "{{ruby_rvm.url}}"
+    dest: "{{ruby_rvm.download_path}}"
+
+- name: Set executable RVM installer
+  file:
+    path: "{{ruby_rvm.download_path}}"
+    mode: 0750
+
+- name: Install RVM 
+  command: "{{ruby_rvm.download_path}} --path /usr/local/rvm stable"
+
+- name: Removing RVM installer
+  file:
+    path: "{{ruby_rvm.download_path}}"
+    state: absent
+
+- name: Install Ruby
+  command: "/usr/local/rvm/bin/rvm install {{ruby_version}}"
+
+- name: Set default Ruby version
+  shell: "source /etc/profile.d/rvm.sh && rvm use {{ruby_version}} --default executable=/bin/bash"
+  ignore_errors: True
+  changed_when: False
+
 ### Check version
 - block:
   - name: Check Ruby Version
     shell: sudo sh -c " ruby -v 1>> /data/logs/install_version.txt"
-    
+
+# 此处gem模块安装命令会带版本号,且命令所带版本号和命令实际版本号不一致,后期待修复,暂用shell模块安装   
 - name: Install Bundler 
   shell: gem install bundler
