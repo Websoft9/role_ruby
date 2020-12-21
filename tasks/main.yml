@@ -2,6 +2,11 @@
 - name: Install this role on {{ansible_os_family}}
   include: "{{ansible_os_family}}.yml"
 
+- name: Create ruby User
+  user:
+    name: ruby
+    shell: /bin/bash
+
 - name: Import key
   shell: |
     curl -sSL https://rvm.io/mpapis.asc | gpg2 --import -
@@ -30,8 +35,23 @@
 
 - name: Set default Ruby version
   shell: "source /etc/profile.d/rvm.sh && rvm use {{ruby_version}} --default executable=/bin/bash"
-  ignore_errors: True
   changed_when: False
+
+- name: Get ruby version
+  shell: ls /usr/local/rvm/rubies |grep ruby
+  register: ruby_dir_name
+
+- name: Get ruby clis
+  shell: ls /usr/local/rvm/rubies/*/bin
+  register: ruby_clis
+
+- name: Create link
+  file:
+    src: '{{ruby_dir_name.stdout}}/bin/{{item}}'
+    dest: '/usr/bin/{{item}}'
+    state: link
+    force: yes
+  with_items: "{{ruby_clis.stdout_lines |list}}"
 
 ### Check version
 - block:
