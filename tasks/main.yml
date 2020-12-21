@@ -42,12 +42,12 @@
   register: ruby_dir_name
 
 - name: Get ruby clis
-  shell: ls /usr/local/rvm/rubies/*/bin
+  shell: ls /usr/local/rvm/rubies/{{ruby_dir_name.stdout}}/bin
   register: ruby_clis
 
 - name: Create link
   file:
-    src: '{{ruby_dir_name.stdout}}/bin/{{item}}'
+    src: '/usr/local/rvm/rubies/{{ruby_dir_name.stdout}}/bin/{{item}}'
     dest: '/usr/bin/{{item}}'
     state: link
     force: yes
@@ -56,8 +56,9 @@
 ### Check version
 - block:
   - name: Check Ruby Version
-    shell: sudo sh -c " ruby -v 1>> /data/logs/install_version.txt"
+    shell: sudo echo $(ruby -v) |sudo tee -a /data/logs/install_version.txt
 
 # 此处gem模块安装命令会带版本号,且命令所带版本号和命令实际版本号不一致,后期待修复,暂用shell模块安装   
 - name: Install Bundler 
-  shell: gem install bundler
+  shell: gem install bundle
+  become_user: ruby
