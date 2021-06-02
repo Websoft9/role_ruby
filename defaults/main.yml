@@ -1,6 +1,5 @@
 # support version: 2.2 2.3 2.4 2.5 2.6
 ruby_version: "2.4"
-ruby_bundle_version: "2.2.5"
 
 # have a dedicated  ubuntu package
 # https://github.com/rvm/rvm
