@@ -61,5 +61,5 @@
 - name: Install version {{ruby_bundle_version}} of bundler
   community.general.gem:
     name: bundler
-    version: "{{ ruby_bundle_version }}"
+    version: "{{ruby_bundle_version}}"
     state: present
