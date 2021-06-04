@@ -45,6 +45,12 @@
   shell: ls /usr/local/rvm/rubies/{{ruby_dir_name.stdout}}/bin
   register: ruby_clis
 
+- name: Install version {{ruby_bundle_version}} of bundler
+  community.general.gem:
+    name: bundler
+    version: "{{ ruby_bundle_version }}"
+    state: present
+
 - name: Create link
   file:
     src: '/usr/local/rvm/rubies/{{ruby_dir_name.stdout}}/bin/{{item}}'
@@ -57,9 +63,3 @@
 - block:
   - name: Check Ruby Version
     shell: sudo echo $(ruby -v) |sudo tee -a /data/logs/install_version.txt
-
-- name: Install version {{ruby_bundle_version}} of bundler
-  community.general.gem:
-    name: bundler
-    version: "{{ ruby_bundle_version }}"
-    state: present
