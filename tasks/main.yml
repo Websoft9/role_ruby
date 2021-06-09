@@ -59,4 +59,4 @@
     shell: sudo echo $(ruby -v) |sudo tee -a /data/logs/install_version.txt
     
 - name: Install version {{ruby_bundle_version}} of bundler
-  shell: gem install bundler -v {{ ruby_bundle_version }} -N
+  shell: bash -lc "gem install bundler -v {{ ruby_bundle_version }} -N"
