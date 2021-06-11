@@ -52,11 +52,21 @@
     state: link
     force: yes
   with_items: "{{ruby_clis.stdout_lines |list}}"
+    
+- name: Install version {{ruby_bundle_version}} of bundler
+  shell: bash -lc "gem install bundler -v {{ ruby_bundle_version }} -N"
+
+- name: Install ruby gems packages 
+  shell: bash -lc "gem install  {{item}} "
+  failed_when: False
+  loop: "{{ ruby_extra_packages }}"
+
+- name: Install ruby applications
+  include_tasks: apps/{{item}}.yml
+  with_items: "{{ruby_applications}}"
+  when: ruby_applications is defined and ruby_applications != "" 
 
 ### Check version
 - block:
   - name: Check Ruby Version
     shell: sudo echo $(ruby -v) |sudo tee -a /data/logs/install_version.txt
-    
-- name: Install version {{ruby_bundle_version}} of bundler
-  shell: bash -lc "gem install bundler -v {{ ruby_bundle_version }} -N"

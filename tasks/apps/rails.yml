@@ -1,0 +1,20 @@
+# prepare_installation
+- name: Create ruby_applications dir
+  file:
+    path: "{{ruby_applications_path}}/rails"
+    state: directory
+    
+- name: Create Demo Project
+  shell: bash -lc "gem install example"
+
+- name: Install bundle and ruby packages
+  shell: |
+    bash -lc "bundle install --path vendor/bundle"
+    bash -lc "rails s -p {{ ruby_applications_rails }}"
+  args:
+    chdir: "{{ruby_applications_path}}/rails/example"
+
+### Check version
+- block:
+  - name: Check Rails Version
+    shell: sudo echo $(rails -v) |sudo tee -a /data/logs/install_version.txt

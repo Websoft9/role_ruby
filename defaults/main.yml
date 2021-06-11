@@ -8,3 +8,11 @@ ruby_bundle_version: "2.2.15"
 ruby_rvm:
   url: https://get.rvm.io
   download_path: /tmp/rvm-installer.sh
+
+ruby_applications_path: "/data/apps"
+
+ruby_applications: []
+  # - rails
+
+ruby_applications_rails: 
+  port: "3000"

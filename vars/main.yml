@@ -1,0 +1,6 @@
+ruby_extra_packages:
+  - dbi
+  - mysql2
+  - mongo
+  - rspec-expectations
+  - ruby​​gems-bundler
