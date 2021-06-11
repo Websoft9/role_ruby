@@ -57,7 +57,6 @@
 - block:
   - name: Check Ruby Version
     shell: sudo echo $(ruby -v) |sudo tee -a /data/logs/install_version.txt
-
-# 此处gem模块安装命令会带版本号,且命令所带版本号和命令实际版本号不一致,后期待修复,暂用shell模块安装   
-- name: Install Bundler 
-  shell: gem install bundle
+    
+- name: Install version {{ruby_bundle_version}} of bundler
+  shell: bash -lc "gem install bundler -v {{ ruby_bundle_version }} -N"
