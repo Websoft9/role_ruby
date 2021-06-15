@@ -14,7 +14,7 @@
     bash -lc "bundle install --path vendor/bundle"
     bash -lc "rails s -p {{ ruby_applications_rails }}"
   args:
-    chdir: "{{ruby_applications_path}}/rails/example"
+    chdir: "{{ruby_applications_path}}/rails/myrails"
 
 ### Check version
 - block:
