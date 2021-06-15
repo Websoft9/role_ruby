@@ -5,7 +5,9 @@
     state: directory
     
 - name: Create Demo Project
-  shell: bash -lc "gem install example"
+  shell: bash -lc "rails new myrails"
+  args:
+    chdir: "{{ruby_applications_path}}/rails"
 
 - name: Install bundle and ruby packages
   shell: |
