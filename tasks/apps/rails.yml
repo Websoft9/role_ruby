@@ -3,20 +3,40 @@
   file:
     path: "{{ruby_applications_path}}/rails"
     state: directory
+
+- name: Install rails
+  shell: bash -lc "gem install rails"
     
 - name: Create Demo Project
-  shell: bash -lc "rails new myrails"
+  shell: bash -lc "rails new myrails -sf"
   args:
     chdir: "{{ruby_applications_path}}/rails"
 
 - name: Install bundle and ruby packages
   shell: |
     bash -lc "bundle install --path vendor/bundle"
-    bash -lc "rails s -p {{ ruby_applications_rails }}"
   args:
     chdir: "{{ruby_applications_path}}/rails/myrails"
 
-### Check version
+- name: Copy rails service file
+  template: 
+    src: rails.services.j2
+    dest: /lib/systemd/system/rails.service
+
+- name: Restart and Enable rails service
+  systemd:
+    name: rails
+    state: started
+    daemon_reload: yes
+    enabled: yes
+
+### check version
 - block:
   - name: Check Rails Version
     shell: sudo echo $(rails -v) |sudo tee -a /data/logs/install_version.txt
+
+## check rails service
+- name: Check rails Service
+  shell: systemctl status rails | grep Active*
+  register: check_rails_service
+  notify: check_rails_service
