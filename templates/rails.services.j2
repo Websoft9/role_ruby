@@ -4,7 +4,7 @@ Requires=network.target
  
 [Service]
 Type=simple
-Environment=RAILS_ENV=production
+Environment=RAILS_ENV=development
 PIDFile=/data/apps/rails/rails.pid
 WorkingDirectory=/data/apps/rails/myrails
 ExecStart=/data/apps/rails/myrails/bin/rails s -p {{ruby_applications_rails.port}} -b 0.0.0.0
