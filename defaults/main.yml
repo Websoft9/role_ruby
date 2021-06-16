@@ -9,10 +9,10 @@ ruby_rvm:
   url: https://get.rvm.io
   download_path: /tmp/rvm-installer.sh
 
-ruby_applications_path: "/data/apps"
-
 ruby_applications: []
   # - rails
 
 ruby_applications_rails: 
   port: "3000"
+  path: "/data/apps/rails"
+  project: "myrails" 

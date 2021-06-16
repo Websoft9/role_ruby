@@ -1,22 +1,22 @@
 # prepare_installation
 - name: Create ruby_applications dir
   file:
-    path: "{{ruby_applications_path}}/rails"
+    path: "{{ruby_applications_rails.path}}"
     state: directory
 
 - name: Install rails
   shell: bash -lc "gem install rails"
     
 - name: Create Demo Project
-  shell: bash -lc "rails new myrails -sf"
+  shell: bash -lc "rails new {{ruby_applications_rails.project}} -sf"
   args:
-    chdir: "{{ruby_applications_path}}/rails"
+    chdir: "{{ruby_applications_rails.path}}"
 
 - name: Install bundle and ruby packages
   shell: |
     bash -lc "bundle install --path vendor/bundle"
   args:
-    chdir: "{{ruby_applications_path}}/rails/myrails"
+    chdir: "{{ruby_applications_rails.path}}/{{ruby_applications_rails.project}}"
 
 - name: Copy rails service file
   template: 
