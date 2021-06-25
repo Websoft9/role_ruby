@@ -1,4 +1,6 @@
-# support version: 2.2 2.3 2.4 2.5 2.6
+# support ruby version: 2.2 2.3 2.4 2.5 2.6
+# support rails on Ubuntu20.0x/CentOS7.x, not support Ubuntu18.04
+
 ruby_version: "2.5"
 ruby_bundle_version: "2.2.15"
 
