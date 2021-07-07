@@ -69,4 +69,4 @@
 ### Check version
 - block:
   - name: Check Ruby Version
-    shell: sudo echo $(ruby -v) |sudo tee -a /data/logs/install_version.txt
+    shell: sudo echo $(bash -lc "ruby -v") |sudo tee -a /data/logs/install_version.txt
