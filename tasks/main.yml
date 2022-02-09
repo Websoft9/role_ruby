@@ -16,6 +16,7 @@
   get_url:
     url: "{{ruby_rvm.url}}"
     dest: "{{ruby_rvm.download_path}}"
+    validate_certs: no
 
 - name: Set executable RVM installer
   file:
