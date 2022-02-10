@@ -7,7 +7,7 @@ Type=simple
 Environment=RAILS_ENV=development
 PIDFile={{ruby_applications_rails.path}}/rails.pid
 WorkingDirectory={{ruby_applications_rails.path}}/{{ruby_applications_rails.project}}
-ExecStart=/usr/bin/bash -lc "rails s -p {{ruby_applications_rails.port}} -b 0.0.0.0"
+ExecStart=/usr/bin/bash -lc "rails server -p {{ruby_applications_rails.port}} -b 0.0.0.0"
 TimeoutSec=30
 RestartSec=15s
 Restart=always
