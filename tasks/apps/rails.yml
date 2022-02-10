@@ -5,7 +5,7 @@
     state: directory
 
 - name: Install rails
-  shell: bash -lc "gem install rails"
+  shell: bash -lc "gem install rails -v 6.1.4"
     
 - name: Create Demo Project
   shell: bash -lc "rails new {{ruby_applications_rails.project}} -sf"
