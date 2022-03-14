@@ -38,21 +38,8 @@
   shell: "source /etc/profile.d/rvm.sh && rvm use {{ruby_version}} --default executable=/bin/bash"
   changed_when: False
 
-- name: Get ruby version
-  shell: ls /usr/local/rvm/rubies |grep ruby
-  register: ruby_dir_name
-
-- name: Get ruby clis
-  shell: ls /usr/local/rvm/rubies/{{ruby_dir_name.stdout}}/bin
-  register: ruby_clis
-
-- name: Create link
-  file:
-    src: '/usr/local/rvm/rubies/{{ruby_dir_name.stdout}}/bin/{{item}}'
-    dest: '/usr/bin/{{item}}'
-    state: link
-    force: yes
-  with_items: "{{ruby_clis.stdout_lines |list}}"
+- name: Rvm export, currently installed version effective immediately
+  shell: rvm export
     
 - name: Install version {{ruby_bundle_version}} of bundler
   shell: bash -lc "gem install bundler -v {{ ruby_bundle_version }} -N"
