@@ -39,7 +39,7 @@
   changed_when: False
 
 - name: Rvm export, currently installed version effective immediately
-  shell: rvm export
+  shell: rvm export -p
     
 - name: Install version {{ruby_bundle_version}} of bundler
   shell: bash -lc "gem install bundler -v {{ ruby_bundle_version }} -N"
