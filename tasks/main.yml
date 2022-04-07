@@ -34,12 +34,12 @@
 - name: Install Ruby
   command: "/usr/local/rvm/bin/rvm install {{ruby_version}}"
 
-- name: Set default Ruby version
-  shell: "source /etc/profile.d/rvm.sh && rvm use {{ruby_version}} --default executable=/bin/bash"
-  changed_when: False
-
 - name: Rvm export, currently installed version effective immediately
-  shell: rvm export -p
+  shell: "source /etc/profile.d/rvm.sh && rvm export -p"
+  
+- name: Set default Ruby version
+  shell: "rvm use {{ruby_version}} --default executable=/bin/bash"
+  changed_when: False
     
 - name: Install version {{ruby_bundle_version}} of bundler
   shell: bash -lc "gem install bundler -v {{ ruby_bundle_version }} -N"
