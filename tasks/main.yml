@@ -35,7 +35,7 @@
   command: "/usr/local/rvm/bin/rvm install {{ruby_version}}"
 
 - name: Rvm export, currently installed version effective immediately
-  shell: "source /etc/profile.d/rvm.sh && rvm export -p"
+  shell: "source /etc/profile.d/rvm.sh && rvm export"
   
 - name: Set default Ruby version
   shell: "rvm use {{ruby_version}} --default executable=/bin/bash"
