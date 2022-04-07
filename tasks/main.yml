@@ -37,7 +37,7 @@
 - name: Rvm export, currently installed version effective immediately
   shell: |
     source /etc/profile.d/rvm.sh
-    rvm export
+    rvm export -p
   
 - name: Set default Ruby version
   shell: "rvm use {{ruby_version}} --default executable=/bin/bash"
