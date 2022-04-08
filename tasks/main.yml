@@ -36,11 +36,11 @@
 
 - name: Rvm export, currently installed version effective immediately
   shell: |
-    source /etc/profile.d/rvm.sh
-    rvm export -p
+    source /etc/profile.d/rvm.sh --default executable=/bin/bash
+    bash -lc "rvm export -p"
   
 - name: Set default Ruby version
-  shell: "rvm use {{ruby_version}} --default executable=/bin/bash"
+  shell: bash -lc "rvm use {{ruby_version}}"
   changed_when: False
     
 - name: Install version {{ruby_bundle_version}} of bundler
