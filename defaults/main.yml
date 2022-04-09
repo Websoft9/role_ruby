@@ -2,7 +2,7 @@
 # support rails on Ubuntu20.0x/CentOS7.x, not support Ubuntu18.04
 
 ruby_version: "2.5"
-ruby_bundle_version: "2.2.15"
+ruby_bundle_version: "2.3.0"
 
 # have a dedicated  ubuntu package
 # https://github.com/rvm/rvm
